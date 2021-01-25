@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/cacti-big.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Cacto.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 49 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 9, 47 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 26, 10 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 18 )
+
+[node name="Cacto" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="cacto" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 200, 2, 102, 99 )
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+position = Vector2( 26, 0 )
+shape = SubResource( 1 )
+
+[node name="Shape2" type="CollisionShape2D" parent="."]
+position = Vector2( -32, 2 )
+shape = SubResource( 2 )
+
+[node name="Shape3" type="CollisionShape2D" parent="."]
+position = Vector2( -1, -29 )
+shape = SubResource( 3 )
+
+[node name="Shape4" type="CollisionShape2D" parent="."]
+position = Vector2( -41, 0 )
+shape = SubResource( 4 )
+
+[node name="Shape5" type="CollisionShape2D" parent="."]
+position = Vector2( 41, -10 )
+shape = SubResource( 4 )

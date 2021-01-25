@@ -1,0 +1,119 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/DinoFake.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/ground.png" type="Texture" id=2]
+[ext_resource path="res://assets/logo.png" type="Texture" id=3]
+[ext_resource path="res://scripts/Main.gd" type="Script" id=4]
+[ext_resource path="res://assets/pressione.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 97.0274, 10 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Press"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pressione:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=3]
+tracks/0/type = "value"
+tracks/0/path = NodePath("logo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 642.374, -218.238 ), Vector2( 642.374, 313.507 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "LogoSai"
+tracks/0/type = "value"
+tracks/0/path = NodePath("logo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 642.374, 313.507 ), Vector2( 642.374, -218.238 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pressione:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Piso" type="StaticBody2D" parent="."]
+position = Vector2( 84, 0 )
+
+[node name="Ground" type="CollisionShape2D" parent="Piso"]
+position = Vector2( 10.052, 659.05 )
+shape = SubResource( 1 )
+
+[node name="Ground" type="Sprite" parent="."]
+position = Vector2( 835, 644 )
+scale = Vector2( 1.72446, 1.24 )
+texture = ExtResource( 2 )
+
+[node name="logo" type="Sprite" parent="."]
+position = Vector2( 642.374, -165.064 )
+scale = Vector2( 0.996774, 0.996774 )
+texture = ExtResource( 3 )
+
+[node name="DinoFake" parent="." instance=ExtResource( 1 )]
+position = Vector2( 79.921, 592 )
+scale = Vector2( 1.28, 1.28 )
+
+[node name="Press" type="AnimationPlayer" parent="."]
+anims/Press = SubResource( 2 )
+
+[node name="AnimMain" type="AnimationPlayer" parent="."]
+anims/LogoEntra = SubResource( 3 )
+anims/LogoSai = SubResource( 4 )
+anims/Pressione = SubResource( 5 )
+
+[node name="pressione" type="Sprite" parent="."]
+visible = false
+position = Vector2( 624.707, 421.838 )
+scale = Vector2( 0.611969, 0.611969 )
+texture = ExtResource( 5 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.69
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]
